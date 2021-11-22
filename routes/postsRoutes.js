@@ -9,10 +9,10 @@ router.get('/', ctrl.posts.index)
 router.post('/', ctrl.posts.create)
 
 // Update Route
-router.put('/:id', )
+router.put('/:id', ctrl.posts.update)
 
 // Delete Route
-router.delete('/:id')
+router.delete('/:id', ctrl.posts.destroy)
 
 // Export
 module.exports = router
