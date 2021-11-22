@@ -18,4 +18,4 @@ app.use(express.json())
 app.use('/api/v1/techonnect/posts', routes.posts)
 
 
-app.listen(port, () => console.log(`Server is runnong on port ${port}.`))
+app.listen(port, () => console.log(`Server is running on port ${port}.`))
