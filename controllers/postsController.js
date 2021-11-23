@@ -2,7 +2,7 @@ const db = require('../models');
 
 const index = async (req, res) => {
     try {
-        const posts = await db.Post.find({});
+        const posts = await db.Post.find({}).sort({createdAt: -1});
         if (!posts) return res.json({message: "No posts found."})
         return res.status(200).json({posts})
 
@@ -24,11 +24,12 @@ const create = async (req, res) => {
 }
 
 const update = (req, res) => {
-    db.Post.findByIdAndUpdate (req.params.id, {$set: {...req.body}}, {new:true}),
+    db.Post.findByIdAndUpdate(req.params.id, {...req.body}, {new:true},
     (error, updatedPost) => {
+        console.log(updatedPost)
         if (error) console.log('There was a error updating the post.')
         return res.status(200).json({updatedPost})
-    }
+    })
 }
 
 const destroy = async (req, res) => {
@@ -46,5 +47,5 @@ module.exports = {
     index,
     create,
     update,
-    destroy
+    destroy,
 }
