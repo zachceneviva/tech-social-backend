@@ -1,3 +1,4 @@
 module.exports = {
-    posts: require('./postsController')
+    posts: require('./postsController'),
+    comments: require('./commentsController')
 }

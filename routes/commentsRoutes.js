@@ -3,16 +3,16 @@ const router = require('express').Router()
 const ctrl = require('../controllers')
 
 // Index
-router.get('/', ctrl)
+router.get('/:postId', ctrl.comments.index)
 
 // Create route
-router.post('/', ctrl)
+router.post('/:postId', ctrl.comments.create)
 
 // Update Route
-router.put('/:id', ctrl)
+router.put('/:postId/:id', ctrl.comments.update)
 
 // Delete Route
-router.delete('/:id', ctrl)
+router.delete('/:postId/:id', ctrl.comments.destroy)
 
 // Export
 module.exports = router
