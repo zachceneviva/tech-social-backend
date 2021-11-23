@@ -16,6 +16,7 @@ app.use(express.json())
 
 // API Route - Middleware
 app.use('/api/v1/techonnect/posts', routes.posts)
+app.use('/api/v1/techonnect/comments', routes.comments)
 
 
 app.listen(port, () => console.log(`Server is running on port ${port}.`))
