@@ -23,13 +23,13 @@ const PostSchema = new Schema({
     link: {
         type: String
     },
-    comments: [{
-        type: mongoose.Types.ObjectId,
-        ref: "Comment"
-    }],
     user: {
         type: mongoose.Types.ObjectId,
         ref: "User"
+    },
+    group: {
+        type: mongoose.Types.ObjectId,
+        ref: "Group"
     }
 }, {timestamps: true})
 
