@@ -5,10 +5,17 @@ const GroupSchema = new Schema({
     name: {
         type: String,
         required: [true, 'Please add a name'],
+        text: true,
     },
     description: {
         type: String,
         required: [true, "Please add a group description."] 
+    },
+    photo: {
+        type: String,
+    },
+    coverPhoto: {
+        type: String,
     },
     members: [{
         type: mongoose.Types.ObjectId,

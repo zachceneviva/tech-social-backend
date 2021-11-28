@@ -14,4 +14,5 @@ module.exports = {
     Comment: require("./Comments"),
     Group: require('./Groups'),
     User: require('./User'),
+    Meetup: require('./Meetups'),
 };
