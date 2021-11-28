@@ -20,7 +20,7 @@ const register = async (req, res) => {
 
         return res.status(201).json({
             status: 201,
-            message: "success", createdUser
+            message: "You have successfully registered.", createdUser
         })
     } catch (error) {
         return res.status(500).json({
@@ -28,4 +28,48 @@ const register = async (req, res) => {
             message: "An error occured. Please try again."
         })
     }
+}
+
+// Login User
+const login = async (req, res) => {
+    try {
+        const foundUser = await db.User.findOne({email: req.body.email}).select("+password")
+
+        if (!foundUser) {
+            return res.status(400).json({
+                status: 400,
+                message: "Email or password is incorrect."
+            })
+        }
+
+        const isMatch = await bcrypt.compare(req.body.password, foundUser.password);
+
+        if (isMatch) {
+            const signedJwt = await jwt.sign(
+                {_id: foundUser._id},
+                process.env.SUPER_SECRET_KEY,
+                { expiresIn: "1h"}
+            )
+            res.status(200).json({
+                status: 200,
+                message: "success",
+                token: signedJwt,
+            })
+        } else {
+            return res.status(400).json ({
+                status: 400,
+                message:"Email or password is incorrect."
+            })
+        }
+    } catch (error) {
+        return res.status(500).json({
+            status: 500,
+            message: "An error occured. Please try again."
+        })
+    }
+}
+
+module.exports = {
+    register,
+    login,
 }
