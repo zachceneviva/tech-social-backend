@@ -9,9 +9,11 @@ const UserSchema = new Schema ({
     avatar: {
         type: String,
         required: true,
+        default: "https://iupac.org/wp-content/uploads/2018/05/default-avatar.png"
     },
     coverPhoto: {
         type: String,
+        default: "https://leadcoat.com/wp-content/uploads/2019/02/Default-Banner.png"
     },
     firstName: {
         type: String,
@@ -28,24 +30,22 @@ const UserSchema = new Schema ({
         required: true,
         unique: true,
     },
-    location: {
-        city: {
-            type: String,
-            required: true
-        },
-        state: {
-            type: String,
-            required: true
-        }
+    city: {
+        type: String,
+        required: true
+    },
+    state: {
+        type: String,
+        required: true
     },
     employment: {
         role: {
             type: String,
-            required: true
+            
         },
         company: {
             type: String,
-            required: true
+           
         }
     },
     techonnections: [{
@@ -54,7 +54,7 @@ const UserSchema = new Schema ({
     }],
     bootcamp: {
         type: String,
-        required: true,
+        
     },
     github: {
         type: String,
