@@ -12,9 +12,12 @@ router.post('/login', ctrl.users.login)
 router.get('./profile', authRequired, ctrl.users.profile)
 
 // All Users Route
-router.get('/', ctrl.users.index)
+router.get('/', authRequired, ctrl.users.index)
 
 // Show User Route
-router.get('/:id', ctrl.users.show)
+router.get('/:id', authRequired, ctrl.users.show)
+
+// Update User Route
+router.put('/:id/edit', authRequired, ctrl.users.update)
 
 module.exports = router;
