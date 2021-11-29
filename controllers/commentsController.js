@@ -3,7 +3,7 @@ const db = require('../models');
 // Index Route
 const index = async (req, res) => {
     try {
-        const comments = await db.Comment.find({post: req.params.postId}).sort({createdAt: -1});
+        const comments = await db.Comment.find({post: req.params.postId}).sort({createdAt: -1}).populate({path: "user", select: 'avatar firstName lastName'});
         if (!comments) return res.json({message: "This post does not have any comments"})
         return res.status(200).json({comments})
 

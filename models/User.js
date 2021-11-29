@@ -8,7 +8,6 @@ const UserSchema = new Schema ({
     },
     avatar: {
         type: String,
-        required: true,
         default: "https://iupac.org/wp-content/uploads/2018/05/default-avatar.png"
     },
     coverPhoto: {
@@ -44,8 +43,7 @@ const UserSchema = new Schema ({
             
         },
         company: {
-            type: String,
-           
+            type: String,       
         }
     },
     techonnections: [{
@@ -73,7 +71,7 @@ const UserSchema = new Schema ({
     notifications:[{
         type: String,
     }]
-}, {timestamps: true})
+    }, {timestamps: true})
 
 const User = mongoose.model("User", UserSchema)
 

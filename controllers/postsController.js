@@ -2,7 +2,7 @@ const db = require('../models');
 
 const index = async (req, res) => {
     try {
-        const posts = await db.Post.find({}).sort({createdAt: -1});
+        const posts = await db.Post.find({}).sort({createdAt: -1}).populate({path: "user", select: 'avatar firstName lastName'});
         if (!posts) return res.json({message: "No posts found."})
         return res.status(200).json({posts})
 

@@ -14,9 +14,21 @@ const register = async (req, res) => {
             })
         }
 
+        let avatar;
+        if (req.body.avatar === '') {
+            avatar=undefined
+        } else {
+            avatar = req.body.avatar
+        }
+        let coverPhoto;
+        if (req.body.coverPhoto === '') {
+            coverPhoto=undefined
+        } else {
+            coverPhoto = req.body.coverPhoto
+        }
         const salt = await bcrypt.genSalt(10)
         const hash = await bcrypt.hash(req.body.password, salt);
-        const createdUser = await db.User.create({...req.body, password: hash});
+        const createdUser = await db.User.create({...req.body, avatar: avatar, coverPhoto: coverPhoto, password: hash});
 
         return res.status(201).json({
             status: 201,
@@ -33,8 +45,9 @@ const register = async (req, res) => {
 // Login User
 const login = async (req, res) => {
     try {
+        
         const foundUser = await db.User.findOne({email: req.body.email}).select("+password")
-
+        
         if (!foundUser) {
             return res.status(400).json({
                 status: 400,
@@ -47,7 +60,7 @@ const login = async (req, res) => {
         if (isMatch) {
             const signedJwt = await jwt.sign(
                 {_id: foundUser._id},
-                process.env.SUPER_SECRET_KEY,
+                'leafyseadragon',
                 { expiresIn: "1h"}
             )
             res.status(200).json({

@@ -9,7 +9,7 @@ router.post('/register', ctrl.users.register)
 router.post('/login', ctrl.users.login)
 
 // Current User Profile
-router.get('./profile', authRequired, ctrl.users.profile)
+router.get('/profile', authRequired, ctrl.users.profile)
 
 // All Users Route
 router.get('/', authRequired, ctrl.users.index)
