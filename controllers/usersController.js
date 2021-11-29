@@ -69,7 +69,25 @@ const login = async (req, res) => {
     }
 }
 
+// Current User Profile
+const profile = async (req, res) => {
+    try {
+        const currentUser = await db.User.findById(req.currentUser)
+
+        return res.json({
+            header: req.headers,
+            user: currentUser,
+        })
+    } catch (error) {
+        return res.status(500).json({
+            status: 500,
+            message: "An error occured. Please try again."
+        })
+    }
+}
+
 module.exports = {
     register,
     login,
+    profile,
 }
