@@ -6,14 +6,14 @@ const PostSchema = new Schema({
         type: String,
         required: [true, 'Please add text content'],
     },
-    likes: {
-        type: Number,
-        default: 0
-    },
-    lightbulbs: {
-        type: Number,
-        default: 0
-    },
+    likes: [{
+        type: mongoose.Types.ObjectId,
+        ref: "User"
+    }],
+    lightbulbs: [{
+        type: mongoose.Types.ObjectId,
+        ref: "User"
+    }],
     github: {
         type: String,
     },
