@@ -23,4 +23,10 @@ router.post('/login', ctrl.users.login)
 // Current User Profile
 router.get('./profile', authRequired, ctrl.users.profile)
 
+// All Users Route
+router.get('/', ctrl.users.index)
+
+// Show User Route
+router.get('/:id', ctrl.users.show)
+
 module.exports = router;

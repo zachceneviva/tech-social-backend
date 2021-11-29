@@ -86,8 +86,22 @@ const profile = async (req, res) => {
     }
 }
 
+// All Users
+const index = async (req, res) => {
+    try {
+        const allUsers = await db.User.find({})
+        return res.status(200).json({allUsers})
+
+    } catch (err) {
+        console.log(err);
+        res.error = err
+    }
+}
+
 module.exports = {
     register,
     login,
     profile,
+    index,
+    
 }
