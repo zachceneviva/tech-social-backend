@@ -92,9 +92,26 @@ const index = async (req, res) => {
         const allUsers = await db.User.find({})
         return res.status(200).json({allUsers})
 
-    } catch (err) {
-        console.log(err);
-        res.error = err
+    } catch (error) {
+        return res.status(500).json({
+            status: 500,
+            message: "An error occured. Please try again."
+        })
+    }
+}
+
+// Show Specific Profile
+const show = async (req, res) => {
+    try {
+        const foundUser = await db.User.findById(req.params.id)
+        return res.status(200).json({
+            game: foundUser,
+        })
+    } catch (error) {
+        return res.status(500).json({
+            status: 500,
+            message: "An error occured. Please try again."
+        })
     }
 }
 
@@ -103,5 +120,5 @@ module.exports = {
     login,
     profile,
     index,
-    
+    show
 }
