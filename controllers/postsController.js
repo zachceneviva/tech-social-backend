@@ -35,6 +35,7 @@ const update = (req, res) => {
 const destroy = async (req, res) => {
     try {
         await db.Post.findByIdAndDelete(req.params.id)
+        await db.Comment.deleteMany({post: req.params.id})
         console.log("Post deleted")
         return res.status(200)
     } catch (err) {
