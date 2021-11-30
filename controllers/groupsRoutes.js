@@ -38,10 +38,12 @@ const create = async (req, res) => {
 
 const show = async (req, res) => {
     try {
-        const foundGroup = db.Group.findById(req.params.id)
-
+        const foundGroup = await db.Group.findById( req.params.id)
+        const allPosts = await db.Post.find({group: req.params.id}).sort({createdAt: -1}).populate({path: "user", select: 'avatar firstName lastName'})
+        
         return res.status(200).json({
             group: foundGroup,
+            posts: allPosts,
         })
     } catch (error) {
         return res.status(500).json({
