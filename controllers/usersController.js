@@ -118,7 +118,7 @@ const show = async (req, res) => {
     try {
         const foundUser = await db.User.findById(req.params.id)
         return res.status(200).json({
-            game: foundUser,
+            user: foundUser,
         })
     } catch (error) {
         return res.status(500).json({
