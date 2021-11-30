@@ -61,7 +61,7 @@ const login = async (req, res) => {
             const signedJwt = await jwt.sign(
                 {_id: foundUser._id},
                 'leafyseadragon',
-                { expiresIn: "1h"}
+                { expiresIn: "10h"}
             )
             res.status(200).json({
                 status: 200,
