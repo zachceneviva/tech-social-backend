@@ -18,6 +18,7 @@ app.use(express.json())
 app.use('/api/v1/techonnect/posts', routes.posts)
 app.use('/api/v1/techonnect/comments', routes.comments)
 app.use('/api/v1/techonnect/users', routes.users)
+app.use('/api/v1/techonnect/groups', routes.groups)
 
 
 app.listen(port, () => console.log(`Server is running on port ${port}.`))

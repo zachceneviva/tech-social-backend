@@ -1,5 +1,6 @@
 module.exports = {
     posts: require('./postsController'),
     comments: require('./commentsController'),
-    users: require('./usersController')
+    users: require('./usersController'),
+    groups: require('./groupsRoutes')
 }

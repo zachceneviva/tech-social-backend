@@ -13,9 +13,11 @@ const GroupSchema = new Schema({
     },
     photo: {
         type: String,
+        default: "https://www.woosync.io/wp-content/uploads/2019/07/group.svg"
     },
     coverPhoto: {
         type: String,
+        default: "https://leadcoat.com/wp-content/uploads/2019/02/Default-Banner.png"
     },
     members: [{
         type: mongoose.Types.ObjectId,

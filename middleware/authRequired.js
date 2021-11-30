@@ -9,6 +9,7 @@ const authRequired =  async (req, res, next) => {
         next();
     } else {
         res.sendStatus(403)
+        next()
     }
 }
 
