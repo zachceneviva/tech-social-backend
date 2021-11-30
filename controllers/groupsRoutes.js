@@ -36,6 +36,21 @@ const create = async (req, res) => {
     }
 }
 
+const show = async (req, res) => {
+    try {
+        const foundGroup = db.Group.findById(req.params.id)
+
+        return res.status(200).json({
+            group: foundGroup,
+        })
+    } catch (error) {
+        return res.status(500).json({
+            status: 500,
+            message: "An error occured. Please try again."
+        })
+    }
+}
+
 const update = (req, res) => {
     db.Group.findByIdAndUpdate(req.params.id, {...req.body}, {new:true},
     (error, updatedGroup) => {
@@ -63,4 +78,5 @@ module.exports = {
     create,
     update,
     destroy,
+    show
 }
