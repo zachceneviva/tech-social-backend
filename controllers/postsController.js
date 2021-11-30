@@ -43,10 +43,23 @@ const destroy = async (req, res) => {
     }
 }
 
+const profilePosts = async (req, res) => {
+    try {
+        const posts = await db.Post.find({user: req.params.id}).sort({createdAt: -1}).populate({path: "user", select: 'avatar firstName lastName'});
+        if (!posts) return res.json({message: "No posts found."})
+        return res.status(200).json({posts})
+
+    } catch (err) {
+        console.log(err);
+        res.error = err
+    }
+}
+
 
 module.exports = {
     index,
     create,
     update,
     destroy,
+    profilePosts
 }

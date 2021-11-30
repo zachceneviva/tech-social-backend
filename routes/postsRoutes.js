@@ -14,5 +14,8 @@ router.put('/:id', ctrl.posts.update)
 // Delete Route
 router.delete('/:id', ctrl.posts.destroy)
 
+//ProfilePost Route
+router.get('/:id', ctrl.posts.profilePosts)
+
 // Export
 module.exports = router
