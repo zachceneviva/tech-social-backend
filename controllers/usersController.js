@@ -130,12 +130,6 @@ const show = async (req, res) => {
 
 // Update Profile
 const update = async (req, res) => {
-    if (user.id !== req.params.id) {
-        return res.status(500).json({
-            status: 500,
-            message: "An error occured. Please try again."
-        })
-    } else {
         try {
             const updatedUser = await db.User.findByIdAndUpdate(req.params.id, {...req.body}, {new: true})
             return res.status(200).json({updatedUser})
@@ -146,7 +140,6 @@ const update = async (req, res) => {
             })
         }
     }
-}
 
 
 module.exports = {

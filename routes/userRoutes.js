@@ -18,6 +18,6 @@ router.get('/', authRequired, ctrl.users.index)
 router.get('/:id', authRequired, ctrl.users.show)
 
 // Update User Route
-router.put('/:id/edit', authRequired, ctrl.users.update)
+router.put('/:id', authRequired, ctrl.users.update)
 
 module.exports = router;
