@@ -17,8 +17,8 @@ const create = async (req, res) => {
 // Get convo messages
 const conversationMessages = async (req, res) => {
     try {
-        const messages = await db.Message.find({convsersationId: req.params.id})
-        return res.status.json(messages)
+        const messages = await db.Message.find({conversationId: req.params.id}).populate({path: "sender", select: 'avatar'})
+        return res.status(200).json(messages)
     } catch (err) {
         return res.status(500).json({
             status: 500,

@@ -16,5 +16,5 @@ module.exports = {
     User: require('./User'),
     Meetup: require('./Meetups'),
     Conversation: require('./Conversations'),
-    Message: require('./Messages')
+    Message: require('./Messages'),
 };

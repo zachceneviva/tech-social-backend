@@ -18,7 +18,7 @@ const allConversations = async (req, res) => {
     try {
         const allConversations = await db.Conversation.find({
             members: {$in: [req.params.id]}
-        })
+        }).populate({path: "members", select: 'avatar firstName lastName'})
         return res.status(200).json({allConversations})
     } catch (err) {
         return res.status(500).json({
