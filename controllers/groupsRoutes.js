@@ -2,7 +2,7 @@ const db = require('../models');
 
 const index = async (req, res) => {
     try {
-        const groups = await db.Group.find({});
+        const groups = await db.Group.find({}).sort({members: -1});
         if (!groups) return res.json({message: "No groups found."})
         return res.status(200).json({groups})
 

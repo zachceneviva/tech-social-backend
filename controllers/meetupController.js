@@ -2,7 +2,7 @@ const db = require('../models');
 
 const index = async (req, res) => {
     try {
-        const meetups = await db.Meetup.find({});
+        const meetups = await db.Meetup.find({}).sort({date: 1});
         if (!meetups) return res.json({message: "No meetups found."})
         return res.status(200).json({meetups})
 
@@ -32,8 +32,8 @@ const create = async (req, res) => {
 
 const show = async (req, res) => {
     try {
-        const foundMeetup = await db.Meetup.findById( req.params.id)
-        
+        const foundMeetup = await db.Meetup.findById(req.params.id).populate({path: "creator", select: 'avatar firstName lastName'})
+        console.log(foundMeetup)
         return res.status(200).json({
             meetup: foundMeetup,
         })

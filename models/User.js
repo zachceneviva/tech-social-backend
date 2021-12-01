@@ -37,14 +37,12 @@ const UserSchema = new Schema ({
         type: String,
         required: true
     },
-    employment: {
-        role: {
-            type: String,
-            
-        },
-        company: {
-            type: String,       
-        }
+    role: {
+        type: String,
+        required: true
+    },
+    company: {
+        type: String,       
     },
     techonnections: [{
         type: mongoose.Types.ObjectId,
