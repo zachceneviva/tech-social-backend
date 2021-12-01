@@ -32,7 +32,7 @@ const create = async (req, res) => {
 
 const show = async (req, res) => {
     try {
-        const foundMeetup = await db.Meetup.findById(req.params.id).populate({path: "creator", select: 'avatar firstName lastName'})
+        const foundMeetup = await db.Meetup.findById(req.params.id).populate({path: "creator", select: 'avatar firstName lastName city state'})
         console.log(foundMeetup)
         return res.status(200).json({
             meetup: foundMeetup,
@@ -45,13 +45,17 @@ const show = async (req, res) => {
     }
 }
 
-const update = (req, res) => {
-    db.Meetup.findByIdAndUpdate(req.params.id, {...req.body}, {new:true},
-    (error, updatedMeetup) => {
-        console.log(updatedMeetup)
-        if (error) console.log('There was a error updating the meetup.')
-        return res.status(200).json({updatedMeetup})
-    })
+const update = async (req, res) => {
+    try {
+        const updateMeetup = await db.Meetup.findByIdAndUpdate(req.params.id, {...req.body}, {new:true})
+            
+        return res.status(200).json(updateMeetup)
+    } catch (error) {
+        return res.status(500).json({
+            status: 500,
+            message: "An error occured. Please try again."
+        })
+    }
 }
 
 const destroy = async (req, res) => {

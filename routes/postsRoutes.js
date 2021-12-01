@@ -17,5 +17,8 @@ router.delete('/:id', ctrl.posts.destroy)
 //ProfilePost Route
 router.get('/:id', ctrl.posts.profilePosts)
 
+// Only Connections Feed
+// router.get('/feed', ctrl.posts.feed)
+
 // Export
 module.exports = router
