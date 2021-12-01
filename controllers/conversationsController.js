@@ -46,5 +46,5 @@ const conversation = async (req, res) => {
 module.exports = {
     create,
     allConversations,
-    conversations,
+    conversation,
 }
