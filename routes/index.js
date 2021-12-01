@@ -3,5 +3,7 @@ module.exports = {
     comments: require('./commentsRoutes'),
     users: require('./userRoutes'),
     groups: require('./groupsRoute'),
-    meetups: require('./meetupRoutes')
+    meetups: require('./meetupRoutes'),
+    conversations: require('./conversationRoutes'),
+    messages: require('./messagesRoutes')
 }

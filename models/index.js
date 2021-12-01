@@ -15,4 +15,6 @@ module.exports = {
     Group: require('./Groups'),
     User: require('./User'),
     Meetup: require('./Meetups'),
+    Conversation: require('./Conversations'),
+    Message: require('./Messages')
 };
