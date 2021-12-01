@@ -26,6 +26,9 @@ const MeetupSchema = new Schema({
     state: {
         type: String,
     },
+    zip: {
+        type: String,
+    },
     description: {
         type: String,
         required: [true, "Please add a group description."] 
