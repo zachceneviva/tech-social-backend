@@ -13,14 +13,18 @@ const MeetupSchema = new Schema({
     },
     photo: {
         type: String,
-    },
-    coverPhoto: {
-        type: String,
+        default: "https://commonlook.com/wp-content/uploads/2019/05/tribe-related-events-placeholder.png"
     },
     address: {
         type: String,
         required: true,
         text: true,
+    },
+    city: {
+        type: String,
+    },
+    state: {
+        type: String,
     },
     description: {
         type: String,
