@@ -5,6 +5,9 @@ const ctrl = require('../controllers')
 // Index Route
 router.get('/', ctrl.groups.index)
 
+// User Groups
+router.get('/profile/:id', ctrl.groups.profileGroup)
+
 //HomeBanner Route
 router.get('/home', ctrl.groups.homeBanner)
 

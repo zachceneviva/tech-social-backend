@@ -25,6 +25,19 @@ const homeBanner = async (req, res) => {
     }
 }
 
+// Groiups part of
+const profileGroup = async (req, res) => {
+    try {
+        const groups = await db.Group.find({members: {$in: req.params.id}}).sort({members: -1}).limit(5);
+        if (!groups) return res.json({message: "No groups found."})
+        return res.status(200).json({groups})
+
+    } catch (err) {
+        console.log(err);
+        res.error = err
+    }
+}
+
 
 const create = async (req, res) => {
     let photo;
@@ -95,5 +108,6 @@ module.exports = {
     update,
     destroy,
     show,
-    homeBanner
+    homeBanner,
+    profileGroup
 }

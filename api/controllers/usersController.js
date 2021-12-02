@@ -85,7 +85,7 @@ const login = async (req, res) => {
 // Current User Profile
 const profile = async (req, res) => {
     try {
-        const currentUser = await db.User.findById(req.currentUser)
+        const currentUser = await db.User.findById(req.currentUser).populate({path: 'techonnections', select: 'avatar firstName lastName city state'})
 
         return res.json({
             header: req.headers,

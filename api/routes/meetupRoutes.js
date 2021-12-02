@@ -5,6 +5,15 @@ const ctrl = require('../controllers')
 // Index Route
 router.get('/', ctrl.meetups.index)
 
+// Home Banner Route
+router.get('/home', ctrl.meetups.homeBanner)
+
+//Group Meetups Route
+router.get('/groups/:id', ctrl.meetups.groupMeetups)
+
+// User Meetups Attending
+router.get('/profile/:id', ctrl.meetups.meetupsAttending)
+
 // Create route
 router.post('/', ctrl.meetups.create)
 
