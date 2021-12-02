@@ -31,3 +31,11 @@ const db = require('./models')
               }
               
               console.log(result.deletedCount,'users deleted')})
+
+              db.Conversation.deleteMany({}, (err, result) => {
+                if (err) {
+                  console.log(err);
+                  process.exit();
+                }
+                
+                console.log(result.deletedCount,'users deleted')})

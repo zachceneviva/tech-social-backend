@@ -31,10 +31,8 @@ const allConversations = async (req, res) => {
 // Get specific convo
 const conversation = async (req, res) => {
     try {
-        const convo = await db.Conversation.findOne({
-            members: {$all: [req.params.firstUserId, req.params.secondUserId]}
-        })
-        return res.status(200).json({convo})
+        const convo = await db.Conversation.findById(req.params.convoId)
+        res.status(200).json(convo)
     } catch (err) {
         return res.status(500).json({
             status: 500,

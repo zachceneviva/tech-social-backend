@@ -7,8 +7,15 @@ const MessageSchema =  new Schema({
         ref: "Conversation",
     },
     sender: {
-        type: mongoose.Types.ObjectId,
-        ref:"User"
+        _id: {
+            type: String
+        },
+        avatar: {
+            type:String
+        },
+        fullName: {
+            type: String
+        },
     },
     text: {
         type:String,

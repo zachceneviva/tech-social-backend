@@ -10,7 +10,7 @@ router.get('/:id', ctrl.conversations.allConversations)
 
 
 // Get convo of two users
-router.get('/:fisrtUserId/:secondUserId', ctrl.conversations.conversation)
+router.get('/find/:convoId', ctrl.conversations.conversation)
 
 
 module.exports = router
