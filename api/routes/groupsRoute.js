@@ -5,6 +5,9 @@ const ctrl = require('../controllers')
 // Index Route
 router.get('/', ctrl.groups.index)
 
+//HomeBanner Route
+router.get('/home', ctrl.groups.homeBanner)
+
 // Create route
 router.post('/', ctrl.groups.create)
 
@@ -16,6 +19,7 @@ router.put('/:id', ctrl.groups.update)
 
 // Delete Route
 router.delete('/:id', ctrl.groups.destroy)
+
 
 
 module.exports = router

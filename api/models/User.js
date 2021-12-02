@@ -48,27 +48,18 @@ const UserSchema = new Schema ({
         type: mongoose.Types.ObjectId,
         ref: "User"
     }],
-    bootcamp: {
-        type: String,
-        
-    },
     github: {
         type: String,
     },
     porfolio: {
         type: String,
     },
-    groups: [{
-        type: mongoose.Types.ObjectId,
-        ref: "Group"
-    }],
-    meetups: [{
-        type: mongoose.Types.ObjectId,
-        ref: "Meetup"
-    }],
     notifications:[{
         type: String,
-    }]
+    }],
+    conversationsWith: [{
+        type: String
+    }],
     }, {timestamps: true})
 
 const User = mongoose.model("User", UserSchema)

@@ -12,6 +12,20 @@ const index = async (req, res) => {
     }
 }
 
+// home banner
+const homeBanner = async (req, res) => {
+    try {
+        const groups = await db.Group.find({}).sort({members: -1}).limit(5);
+        if (!groups) return res.json({message: "No groups found."})
+        return res.status(200).json({groups})
+
+    } catch (err) {
+        console.log(err);
+        res.error = err
+    }
+}
+
+
 const create = async (req, res) => {
     let photo;
     if(req.body.photo === null) {
@@ -80,5 +94,6 @@ module.exports = {
     create,
     update,
     destroy,
-    show
+    show,
+    homeBanner
 }
