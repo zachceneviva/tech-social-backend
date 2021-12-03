@@ -85,10 +85,26 @@ const login = async (req, res) => {
 // Current User Profile
 const profile = async (req, res) => {
     try {
-        const currentUser = await db.User.findById(req.currentUser).populate({path: 'techonnections', select: 'avatar firstName lastName city state'})
+        const currentUser = await db.User.findById(req.currentUser)
 
         return res.json({
             header: req.headers,
+            user: currentUser,
+        })
+    } catch (error) {
+        return res.status(500).json({
+            status: 500,
+            message: "An error occured. Please try again."
+        })
+    }
+}
+
+// Current user techonnection
+const conections = async (req, res) => {
+    try {
+        const currentUser = await db.User.findById(req.currentUser).populate({path: 'techonnections', select: 'avatar firstName lastName city state'})
+        
+        return res.json({
             user: currentUser,
         })
     } catch (error) {
@@ -149,4 +165,5 @@ module.exports = {
     index,
     show,
     update,
+    conections
 }

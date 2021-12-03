@@ -11,6 +11,9 @@ router.post('/login', ctrl.users.login)
 // Current User Profile
 router.get('/profile', authRequired, ctrl.users.profile)
 
+//Current user connections
+router.get('/profile/connections', authRequired, ctrl.users.conections)
+
 // All Users Route
 router.get('/', authRequired, ctrl.users.index)
 

@@ -58,7 +58,8 @@ const UserSchema = new Schema ({
         type: String,
     }],
     conversationsWith: [{
-        type: String
+        type: mongoose.Types.ObjectId,
+        ref: "User"
     }],
     }, {timestamps: true})
 
