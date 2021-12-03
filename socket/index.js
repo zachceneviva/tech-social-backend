@@ -1,6 +1,6 @@
-const io = require("socket.io")(8000, {
+const io = require("socket.io")(process.env.PORT, {
     cors: {
-        origin: "http://localhost:3000",
+        origin: "https://tender-haibt-f86691.netlify.app",
     },
 });
 
