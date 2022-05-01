@@ -15,16 +15,16 @@ const register = async (req, res) => {
         }
 
         let avatar;
-        if (req.body.avatar === '') {
-            avatar=undefined
+        if (req.body.avatar) {
+            avatar=req.file?.avatar
         } else {
-            avatar = req.body.avatar
+            avatar = 'https://techonnect.s3.us-east-2.amazonaws.com/default+avatar.jpeg'
         }
         let coverPhoto;
-        if (req.body.coverPhoto === '') {
-            coverPhoto=undefined
+        if (req.body.coverPhoto) {
+            coverPhoto=req.file?.coverPhoto
         } else {
-            coverPhoto = req.body.coverPhoto
+            coverPhoto = 'https://techonnect.s3.us-east-2.amazonaws.com/Default-Banner.png'
         }
         const salt = await bcrypt.genSalt(10)
         const hash = await bcrypt.hash(req.body.password, salt);
@@ -45,15 +45,15 @@ const register = async (req, res) => {
 // Login User
 const login = async (req, res) => {
     try {
-        
         const foundUser = await db.User.findOne({email: req.body.email}).select("+password")
         
         if (!foundUser) {
-            return res.status(400).json({
-                status: 400,
+            return res.status(200).json({
+                status: 'failed',
                 message: "Email or password is incorrect."
             })
         }
+
 
         const isMatch = await bcrypt.compare(req.body.password, foundUser.password);
 
@@ -69,8 +69,8 @@ const login = async (req, res) => {
                 token: signedJwt,
             })
         } else {
-            return res.status(400).json ({
-                status: 400,
+            return res.status(200).json ({
+                status: 'failed',
                 message:"Email or password is incorrect."
             })
         }

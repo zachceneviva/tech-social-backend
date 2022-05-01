@@ -15,7 +15,7 @@ const index = async (req, res) => {
 
 const create = async (req, res) => {
     try {
-        const newComment = {...req.body, post: req.params.postId}
+        const newComment = {...req.body}
         const comment = await db.Comment.create(newComment)
 
         return res.status(201).json({comment})
