@@ -60,7 +60,7 @@ const login = async (req, res) => {
         if (isMatch) {
             const signedJwt = await jwt.sign(
                 {_id: foundUser._id},
-                'leafyseadragon',
+                process.env.JWT_SECRET,
                 { expiresIn: "24h"}
             )
             res.status(200).json({
