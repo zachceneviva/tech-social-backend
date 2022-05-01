@@ -1,10 +1,10 @@
 const router = require('express').Router()
 const ctrl = require('../controllers')
 const authRequired = require('../middleware/authRequired')
-const uploadFile = require('../middleware/FileUpload')
+const uploadImage = require('../middleware/FileUpload')
 
 //Register
-router.post('/register', uploadFile.fields([{name: 'avatar', name:'coverPhoto'}]), ctrl.users.register)
+router.post('/register', uploadImage.fields([{name:"avatar", maxCount: 1}, {name:"coverPhoto", maxCount: 1}]), ctrl.users.register)
 
 // Login
 router.post('/login', ctrl.users.login)

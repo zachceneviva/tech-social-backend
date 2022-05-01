@@ -1,7 +1,9 @@
 // imports
+require('dotenv').config()
 const express = require('express')
 const cors = require ('cors')
 const routes = require('./routes')
+const aws = require('aws-sdk')
 
 
 //Constants
@@ -10,6 +12,11 @@ const app =  express()
 
 // CORS - Middleware
 app.use(cors())
+
+aws.config.update({
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+})
 
 //JSON parsing - Middleware
 app.use(express.json())

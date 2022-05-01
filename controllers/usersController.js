@@ -8,21 +8,23 @@ const register = async (req, res) => {
         const foundUserEmail = await db.User.findOne({email: req.body.email})
 
         if (foundUserEmail) {
-            return res.status(400).json({
+            return res.status(200).json({
                 status: 400,
                 message: "This email addess has already been registered."
             })
         }
 
+        console.log(req.files)
+
         let avatar;
-        if (req.body.avatar) {
-            avatar=req.file?.avatar
+        if (req.files?.avatar) {
+            avatar=req.files.avatar[0].location
         } else {
             avatar = 'https://techonnect.s3.us-east-2.amazonaws.com/default+avatar.jpeg'
         }
         let coverPhoto;
-        if (req.body.coverPhoto) {
-            coverPhoto=req.file?.coverPhoto
+        if (req.files?.coverPhoto) {
+            coverPhoto=req.files?.coverPhoto[0].location
         } else {
             coverPhoto = 'https://techonnect.s3.us-east-2.amazonaws.com/Default-Banner.png'
         }
