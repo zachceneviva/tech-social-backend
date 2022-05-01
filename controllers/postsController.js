@@ -17,6 +17,8 @@ const create = async (req, res) => {
         const newPost = {...req.body}
         const post = await db.Post.create(newPost)
 
+        const returnPost = await db.Post.findOne({_id: post._id}).populate('user', '_id avatar firstName lastName')
+
         return res.status(201).json({post})
     } catch (err) {
         console.log(err)

@@ -60,7 +60,7 @@ const login = async (req, res) => {
         if (isMatch) {
             const signedJwt = await jwt.sign(
                 {_id: foundUser._id},
-                process.env.JWT_SECRET,
+                `${process.env.JWT_SECRET}`,
                 { expiresIn: "24h"}
             )
             res.status(200).json({
@@ -85,6 +85,7 @@ const login = async (req, res) => {
 // Current User Profile
 const profile = async (req, res) => {
     try {
+        if (!req.currentUser) return res.status(400)
         const currentUser = await db.User.findById(req.currentUser)
 
         return res.json({
