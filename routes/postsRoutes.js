@@ -1,12 +1,13 @@
 // Imports
 const router = require('express').Router()
 const ctrl = require('../controllers')
+const uploadImage = require('../middleware/FileUpload')
 
 // Index
 router.get('/', ctrl.posts.index)
 
 // Create route
-router.post('/', ctrl.posts.create)
+router.post('/', uploadImage.single('image'),ctrl.posts.create)
 
 // Update Route
 router.put('/:id', ctrl.posts.update)

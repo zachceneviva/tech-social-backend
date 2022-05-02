@@ -15,7 +15,17 @@ const index = async (req, res) => {
 const create = async (req, res) => {
     try {
         const newPost = {...req.body}
-        const post = await db.Post.create(newPost)
+        let image;
+        if (req?.file) {
+            image = req.file.location
+        } else {
+            image = ''
+        }
+   
+        console.log(req.body, image)
+        const post = await db.Post.create({...newPost, image: image})
+
+        const returnPost = await db.Post.findOne({_id: post._id}).populate('user', '_id avatar firstName lastName')
 
         return res.status(201).json({post})
     } catch (err) {

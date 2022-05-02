@@ -1,6 +1,7 @@
 // Imports
 const router = require('express').Router()
 const ctrl = require('../controllers')
+const uploadImage = require('../middleware/FileUpload')
 
 // Index Route
 router.get('/', ctrl.meetups.index)
@@ -15,7 +16,7 @@ router.get('/groups/:id', ctrl.meetups.groupMeetups)
 router.get('/profile/:id', ctrl.meetups.meetupsAttending)
 
 // Create route
-router.post('/', ctrl.meetups.create)
+router.post('/', uploadImage.single('photo'),ctrl.meetups.create)
 
 //Show Route
 router.get('/:id', ctrl.meetups.show)

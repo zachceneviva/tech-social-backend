@@ -13,7 +13,7 @@ const MeetupSchema = new Schema({
     },
     photo: {
         type: String,
-        default: "https://commonlook.com/wp-content/uploads/2019/05/tribe-related-events-placeholder.png"
+        default: "https://techonnect.s3.us-east-2.amazonaws.com/default-meetup.webp"
     },
     address: {
         type: String,
@@ -38,6 +38,7 @@ const MeetupSchema = new Schema({
         ref: "User"
     }],
     group: {
+        required: false,
         type: mongoose.Types.ObjectId,
         ref: "Group"
     },

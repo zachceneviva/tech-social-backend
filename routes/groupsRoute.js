@@ -1,6 +1,7 @@
 // Imports
 const router = require('express').Router()
 const ctrl = require('../controllers')
+const uploadImage = require('../middleware/FileUpload')
 
 // Index Route
 router.get('/', ctrl.groups.index)
@@ -12,7 +13,7 @@ router.get('/profile/:id', ctrl.groups.profileGroup)
 router.get('/home', ctrl.groups.homeBanner)
 
 // Create route
-router.post('/', ctrl.groups.create)
+router.post('/', uploadImage.fields([{name:"photo", maxCount: 1}, {name:"coverPhoto", maxCount: 1}]),ctrl.groups.create)
 
 //Show Route
 router.get('/:id', ctrl.groups.show)

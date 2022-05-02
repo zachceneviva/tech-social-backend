@@ -8,11 +8,11 @@ const UserSchema = new Schema ({
     },
     avatar: {
         type: String,
-        default: "https://iupac.org/wp-content/uploads/2018/05/default-avatar.png"
+        default: "https://techonnect.s3.us-east-2.amazonaws.com/default+avatar.jpeg"
     },
     coverPhoto: {
         type: String,
-        default: "https://leadcoat.com/wp-content/uploads/2019/02/Default-Banner.png"
+        default: "https://techonnect.s3.us-east-2.amazonaws.com/Default-Banner.png"
     },
     firstName: {
         type: String,

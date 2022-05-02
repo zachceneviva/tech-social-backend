@@ -52,15 +52,15 @@ const meetupsAttending = async (req, res) => {
 }
 
 const create = async (req, res) => {
-    let photo;
-    if(req.body.photo === null) {
-        photo = undefined
-    } else {
-        photo = req.body.photo
-    }
     
     try {
-        const newMeetup = {...req.body, photo}
+        let photo;
+        if(req?.file) {
+            photo = req.file.location
+        } else {
+            photo = 'https://techonnect.s3.us-east-2.amazonaws.com/default-meetup.webp'
+        }
+        const newMeetup = {...req.body, photo: photo, group: req.body.group || null}
         const meetup = await db.Meetup.create(newMeetup)
         console.log(meetup)
         return res.status(201).json({meetup})

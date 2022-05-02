@@ -8,23 +8,25 @@ const register = async (req, res) => {
         const foundUserEmail = await db.User.findOne({email: req.body.email})
 
         if (foundUserEmail) {
-            return res.status(400).json({
+            return res.status(200).json({
                 status: 400,
                 message: "This email addess has already been registered."
             })
         }
 
+        console.log(req.files)
+
         let avatar;
-        if (req.body.avatar === '') {
-            avatar=undefined
+        if (req.files?.avatar) {
+            avatar=req.files.avatar[0].location
         } else {
-            avatar = req.body.avatar
+            avatar = 'https://techonnect.s3.us-east-2.amazonaws.com/default+avatar.jpeg'
         }
         let coverPhoto;
-        if (req.body.coverPhoto === '') {
-            coverPhoto=undefined
+        if (req.files?.coverPhoto) {
+            coverPhoto=req.files?.coverPhoto[0].location
         } else {
-            coverPhoto = req.body.coverPhoto
+            coverPhoto = 'https://techonnect.s3.us-east-2.amazonaws.com/Default-Banner.png'
         }
         const salt = await bcrypt.genSalt(10)
         const hash = await bcrypt.hash(req.body.password, salt);
@@ -45,22 +47,22 @@ const register = async (req, res) => {
 // Login User
 const login = async (req, res) => {
     try {
-        
         const foundUser = await db.User.findOne({email: req.body.email}).select("+password")
         
         if (!foundUser) {
-            return res.status(400).json({
-                status: 400,
+            return res.status(200).json({
+                status: 'failed',
                 message: "Email or password is incorrect."
             })
         }
+
 
         const isMatch = await bcrypt.compare(req.body.password, foundUser.password);
 
         if (isMatch) {
             const signedJwt = await jwt.sign(
                 {_id: foundUser._id},
-                'leafyseadragon',
+                `${process.env.JWT_SECRET}`,
                 { expiresIn: "24h"}
             )
             res.status(200).json({
@@ -69,8 +71,8 @@ const login = async (req, res) => {
                 token: signedJwt,
             })
         } else {
-            return res.status(400).json ({
-                status: 400,
+            return res.status(200).json ({
+                status: 'failed',
                 message:"Email or password is incorrect."
             })
         }
@@ -85,6 +87,7 @@ const login = async (req, res) => {
 // Current User Profile
 const profile = async (req, res) => {
     try {
+        if (!req.currentUser) return res.status(400)
         const currentUser = await db.User.findById(req.currentUser)
 
         return res.json({
@@ -147,7 +150,25 @@ const show = async (req, res) => {
 // Update Profile
 const update = async (req, res) => {
         try {
-            const updatedUser = await db.User.findByIdAndUpdate(req.params.id, {...req.body}, {new: true})
+            let user = db.User.findById(req.params.id)
+            
+            let coverPhoto;
+            let avatar;
+            if (req.files?.avatar) {
+                avatar=req.files.avatar[0].location
+            } else {
+                avatar = user?.avatar
+            }
+            
+            if (req.files?.coverPhoto) {
+                coverPhoto=req.files?.coverPhoto[0].location
+            } else {
+                coverPhoto = user.coverPhoto
+            }
+            
+            const updatedUser = await db.User.findByIdAndUpdate(req.params.id, {...req.body, avatar: avatar, coverPhoto: coverPhoto}, {new: true})
+            
+            
             return res.status(200).json({updatedUser})
         } catch (error) {
             return res.status(500).json({

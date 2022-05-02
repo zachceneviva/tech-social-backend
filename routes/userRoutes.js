@@ -1,9 +1,10 @@
 const router = require('express').Router()
 const ctrl = require('../controllers')
 const authRequired = require('../middleware/authRequired')
+const uploadImage = require('../middleware/FileUpload')
 
 //Register
-router.post('/register', ctrl.users.register)
+router.post('/register', uploadImage.fields([{name:"avatar", maxCount: 1}, {name:"coverPhoto", maxCount: 1}]), ctrl.users.register)
 
 // Login
 router.post('/login', ctrl.users.login)
@@ -21,6 +22,6 @@ router.get('/', authRequired, ctrl.users.index)
 router.get('/:id', authRequired, ctrl.users.show)
 
 // Update User Route
-router.put('/:id', authRequired, ctrl.users.update)
+router.put('/:id', authRequired, uploadImage.fields([{name:"avatar", maxCount: 1}, {name:"coverPhoto", maxCount: 1}]), ctrl.users.update)
 
 module.exports = router;

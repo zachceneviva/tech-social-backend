@@ -6,7 +6,7 @@ const ctrl = require('../controllers')
 router.get('/:postId', ctrl.comments.index)
 
 // Create route
-router.post('/:postId', ctrl.comments.create)
+router.post('/', ctrl.comments.create)
 
 // Update Route
 router.put('/:postId/:id', ctrl.comments.update)
