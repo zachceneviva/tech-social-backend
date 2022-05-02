@@ -38,6 +38,7 @@ const MeetupSchema = new Schema({
         ref: "User"
     }],
     group: {
+        required: false,
         type: mongoose.Types.ObjectId,
         ref: "Group"
     },

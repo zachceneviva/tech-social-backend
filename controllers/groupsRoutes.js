@@ -40,21 +40,22 @@ const profileGroup = async (req, res) => {
 
 
 const create = async (req, res) => {
-    let photo;
-    if(req.body.photo === null) {
-        photo = undefined
-    } else {
-        photo = req.body.photo
-    }
-    let coverPhoto;
-    if (req.body.coverPhoto === null) {
-        coverPhoto = undefined
-    } else {
-        coverPhoto = req.body.coverPhoto
-    }
     try {
-
-        const newGroup = {...req.body, photo, coverPhoto}
+        
+        let photo;
+        console.log(req.files)
+        if(req.files?.photo) {
+            photo = req.files.photo[0].location
+        } else {
+            photo = 'https://techonnect.s3.us-east-2.amazonaws.com/default-group.svg'
+        }
+        let coverPhoto;
+        if (req.files?.coverPhoto) {
+            coverPhoto = req.files.coverPhoto[0].location
+        } else {
+            coverPhoto = 'https://techonnect.s3.us-east-2.amazonaws.com/Default-Banner.png'
+        }
+        const newGroup = {...req.body, photo: photo, coverPhoto: coverPhoto}
         const group = await db.Group.create(newGroup)
         console.log(group)
         return res.status(201).json({group})

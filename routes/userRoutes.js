@@ -22,6 +22,6 @@ router.get('/', authRequired, ctrl.users.index)
 router.get('/:id', authRequired, ctrl.users.show)
 
 // Update User Route
-router.put('/:id', authRequired, ctrl.users.update)
+router.put('/:id', authRequired, uploadImage.fields([{name:"avatar", maxCount: 1}, {name:"coverPhoto", maxCount: 1}]), ctrl.users.update)
 
 module.exports = router;

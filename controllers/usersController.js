@@ -150,7 +150,25 @@ const show = async (req, res) => {
 // Update Profile
 const update = async (req, res) => {
         try {
-            const updatedUser = await db.User.findByIdAndUpdate(req.params.id, {...req.body}, {new: true})
+            let user = db.User.findById(req.params.id)
+            
+            let coverPhoto;
+            let avatar;
+            if (req.files?.avatar) {
+                avatar=req.files.avatar[0].location
+            } else {
+                avatar = user?.avatar
+            }
+            
+            if (req.files?.coverPhoto) {
+                coverPhoto=req.files?.coverPhoto[0].location
+            } else {
+                coverPhoto = user.coverPhoto
+            }
+            
+            const updatedUser = await db.User.findByIdAndUpdate(req.params.id, {...req.body, avatar: avatar, coverPhoto: coverPhoto}, {new: true})
+            
+            
             return res.status(200).json({updatedUser})
         } catch (error) {
             return res.status(500).json({
